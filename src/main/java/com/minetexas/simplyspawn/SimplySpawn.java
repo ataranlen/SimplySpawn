@@ -12,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.minetexas.simplyspawn.RespawnListener;
-import com.minetexas.simplyspawn.TeleportUtils;
 import com.minetexas.simplyspawn.exception.InvalidConfiguration;
 import com.minetexas.simplyspawn.util.SSSettings;
 
