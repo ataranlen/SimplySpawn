@@ -26,7 +26,14 @@ public class SimplySpawn extends JavaPlugin {
 		pluginManager.registerEvents(new RespawnListener(), this);
 		try {
 			SSSettings.init(this);
-		} catch (IOException | InvalidConfigurationException | InvalidConfiguration e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidConfigurationException e ) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidConfiguration e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -99,17 +106,24 @@ public class SimplySpawn extends JavaPlugin {
     		}
     		try {
 				SSSettings.reloadConfigFile();
-			} catch (IOException | InvalidConfigurationException | InvalidConfiguration e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (InvalidConfigurationException e ) {
+
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (InvalidConfiguration e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
     	}  else
     		return false;  // unknown command, should not happen
     	return true;
     }
 	
 	public void getBed(Player player, OfflinePlayer target) {
-		Location spawn = target.getBedSpawnLocation();
+		Location spawn = target.getRespawnLocation();
 		if(spawn != null) { //check if bed location even exists
 			player.sendMessage(ChatColor.RED + "Bed Location xyz: "+spawn.getBlockX()+" "+spawn.getBlockY()+" "+spawn.getBlockZ());
 			if (player.hasPermission(SSSettings.GET_AND_GO_TO_BED)){ 
@@ -122,7 +136,7 @@ public class SimplySpawn extends JavaPlugin {
 	}
 	
 	public void goToBed(Player player) {
-		Location spawn = player.getBedSpawnLocation();
+		Location spawn = player.getRespawnLocation();
 		if(spawn != null) { //check if bed location even exists
 			if (player.hasPermission("rssetspawn.bed")){
 				player.sendMessage(ChatColor.RED + "Bed Location xyz: "+spawn.getBlockX()+" "+spawn.getBlockY()+" "+spawn.getBlockZ());

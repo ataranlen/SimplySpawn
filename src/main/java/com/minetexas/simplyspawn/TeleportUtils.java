@@ -15,8 +15,12 @@ import com.minetexas.simplyspawn.util.SSSettings;
 
 public class TeleportUtils implements Listener {
 	
-	public static void randomSpawn(Player p) {
-		p.teleport(randomLocation(p.getWorld()));
+	public static void randomSpawn(Player player) {
+		if (!player.isSleeping()) {
+			player.teleport(randomLocation(player.getWorld()));
+		} else {
+			player.sendMessage(ChatColor.RED + "Get up you lazy bum!");
+		}
 	}
 	
 	public static void spawn(Player player) {
@@ -29,13 +33,18 @@ public class TeleportUtils implements Listener {
 		Location spawn = player.getWorld().getSpawnLocation();
 
 		int modifier = SSSettings.spawnRadius;
-		int x1 = (int) Math.round(modifier * -1);
-		int x2 = (int) Math.round(modifier);
-		int randomX = TeleportUtils.generateInt(x1, SSSettings.randomSpawnRadius + x2);
-		int randomY = TeleportUtils.generateInt(x1, SSSettings.randomSpawnRadius + x2);
-		spawn.setX(spawn.getBlockX() + randomX);
-		spawn.setY(spawn.getBlockY());
-		spawn.setZ(spawn.getBlockZ() + randomY);
+		if (modifier > 0) {
+			int x1 = (int) Math.round(modifier * -1);
+			int x2 = (int) Math.round(modifier);
+			int randomX = TeleportUtils.generateInt(x1, x2);
+			int randomY = TeleportUtils.generateInt(x1, x2);
+			spawn.setX(spawn.getBlockX() + 0.5 + randomX);
+			spawn.setY(spawn.getBlockY());
+			spawn.setZ(spawn.getBlockZ() + 0.5 + randomY);
+		} else {
+			spawn.setX(spawn.getBlockX() + 0.5);
+			spawn.setZ(spawn.getBlockZ() + 0.5);
+		}
 		if (!player.isSleeping()) {
 			player.teleport(spawn);
 		} else {
@@ -52,7 +61,7 @@ public class TeleportUtils implements Listener {
 		int z = generateInt(x1, SSSettings.randomSpawnRadius + x2);
 		int y = 0;
 		
-		Location loc = new Location(w, x, y, z);
+		Location loc = new Location(w, x + 0.5, y, z + 0.5);
 		Chunk chunk = loc.getChunk();
 		
 		
@@ -60,11 +69,11 @@ public class TeleportUtils implements Listener {
 			chunk.load(true);
 		}
 		
-		loc.setY(w.getHighestBlockYAt(loc));
+		loc.setY(w.getHighestBlockYAt(loc) + 1);
 		
 		Block under = w.getBlockAt(loc);
 		
-		if(under.getType() == Material.LAVA || under.getType() == Material.STATIONARY_LAVA) {
+		if(under.getType() == Material.LAVA) {
 			under.setType(Material.STONE);
 			loc.setY(loc.getY() + 1);
 		}

@@ -31,8 +31,8 @@ public class SSSettings {
 	public static final String SET_SPAWN = "rssetspawn.setspawn";
 	public static final String RELOAD = "rssetspawn.reload";
 
-	public static int spawnRadius = 500;
-	public static int randomSpawnRadius = 16;
+	public static int spawnRadius = 16;
+	public static int randomSpawnRadius = 500;
 	public static List<String> enabledWorlds;
 	public static boolean spawnCommandIsRandom = false;
 	public static int spawnMultiplier = 1;

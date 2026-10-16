@@ -17,7 +17,7 @@ public class RespawnListener implements Listener {
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
 		World world = player.getWorld();
-		if (player.getBedSpawnLocation() == null) {
+		if (player.getRespawnLocation() == null) {
 			if (!world.getName().contains("nether") && !world.getName().contains("end")) {
 				Location location = TeleportUtils.randomLocation(player.getWorld());
 				event.setRespawnLocation(location);

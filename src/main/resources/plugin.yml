@@ -1,6 +1,6 @@
 name: SimplySpawn
 main: com.minetexas.simplyspawn.SimplySpawn
-version: 0.2
+version: 1.4
 author: ataranlen
 description: Random Spawn.
 commands:
